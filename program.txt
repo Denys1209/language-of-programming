@@ -1,0 +1,7 @@
+w = -2+2
+w2 = w+PI
+print "\nw = "+w
+print "\nw2 = "+ w2
+
+
+

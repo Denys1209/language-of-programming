@@ -45,7 +45,8 @@ std::unique_ptr<Statement> Parser::assigmentStatement()
 		consume(Token_type::EQ);
 		return std::make_unique<AssigmentStatement>(variable, this->expression());
 	}
-	throw std::exception("Unknow operator");
+	std::string ex = "Unknow operator " + current.getText();
+	throw std::exception(ex.c_str());
 }
 
 std::unique_ptr<Expression> Parser::multiplicative()
@@ -93,11 +94,15 @@ std::unique_ptr<Expression> Parser::primary()
 	Token current = this->get(0);
 	if (this->match(Token_type::NUMBER))
 	{
-		return std::make_unique<NumberExpression>(this->string_to_int(current.getText()));
+		return std::make_unique<ValueExpression>(this->string_to_double(current.getText()));
 	}
 	if (this->match(Token_type::WORD))
 	{
 		return std::make_unique<constantExpression>(current.getText());
+	}
+	if (this->match(Token_type::TEXT))
+	{
+		return std::make_unique<ValueExpression>(current.getText());
 	}
 	if (this->match(Token_type::LPAREN))
 	{
@@ -108,4 +113,24 @@ std::unique_ptr<Expression> Parser::primary()
 	}
 	
 	throw std::exception("unknown expression");
+}
+std::unique_ptr<Expression> Parser::expression()
+{
+	return additive();
+}
+std::unique_ptr<Statement> Parser::statement()
+{
+	if (match(Token_type::PRINT)) 
+	{
+		return std::make_unique<PrintStatement>(this->expression());
+	}
+	return assigmentStatement();
+}
+std::unique_ptr<Expression> Parser::unary()
+{
+	if (match(Token_type::MINUS)) 
+	{
+		return std::make_unique<UnaryExpression>('-', primary());
+	}
+	return primary();
 }

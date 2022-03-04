@@ -12,9 +12,9 @@ public:
 	{
 		this->name = name;
 	}
-	double eval(Veriables &main_veriables_list) override
+	value_ptr eval(Veriables &main_veriables_list) override
 	{
-		return main_veriables_list.get(name);
+		return std::make_unique<NumberValue>((*main_veriables_list.get(name)).asDouble());
 	}
 	std::string get_str()override
 	{

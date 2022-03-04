@@ -5,13 +5,30 @@
 #include "Parser.h"
 #include <exception>   
 #include "Statement.h"
-
+#include <fstream>
 
 
 
 int  main(int argc, char** argv) {
 
-	std::string prog = "w= 2+2 w2 = PI+w";
+	std::string prog = "";
+	std::ifstream filer;          // поток для записи
+	filer.open("program.txt"); // окрываем файл для записи
+	if (!filer.is_open())
+	{
+		std::cout << "error open file" << std::endl;
+		return 0;
+	}
+	else 
+	{
+		char ch;
+		while (filer.get(ch)) 
+		{
+			prog.push_back(ch);
+		}
+	}
+	
+	
 	Lexer first(prog);
 	std::vector<Token> PROG_TOKEN = first.tokenize();
 	/*for (auto &i : PROG_TOKEN) 
@@ -28,15 +45,15 @@ int  main(int argc, char** argv) {
 		std::cout << s.what() << std::endl;
 	}
 	
-	for (auto&i : exp) 
+	/*for (auto&i : exp) 
 	{
 		std::cout << (*i).get_str()<<std::endl;
-	}
+	}*/
 	
 	try {
-		std::cout << "\n";
-		std::cout << "w" << "=" << par.get_main_veriables_list().get("w") << std::endl;
-		std::cout << "w2" << "=" << par.get_main_veriables_list().get("w2") << std::endl;
+		/*std::cout << "\n";
+		std::cout << "w" << "=" << (*par.get_main_veriables_list().get("w")).asDouble() << std::endl;
+		std::cout << "w2" << "=" << (*par.get_main_veriables_list().get("w2")).asDouble() << std::endl;*/
 	}
 	catch (std::exception s)
 	{

@@ -40,6 +40,6 @@ public:
 	void tokenizeWord();
 
 	void tokenizeOperator();
-	
+	void tokenizeText();
 };
 

@@ -34,6 +34,10 @@ vector_token Lexer::tokenize()
 		{
 			this->tokenizeOperator();
 		}
+		else if (current == '"')
+		{
+			this->tokenizeText();
+		}
 		else if (this->EtoBuk(current))
 		{
 			this->tokenizeWord();
@@ -55,7 +59,7 @@ void  Lexer::tokenizeNumber()
 		{
 			if (stringbuilder.find(current) != std::string::npos)
 			{
-				throw std::exception("invalid float number");
+				throw std::exception("invalid double number");
 			}
 		}
 		else if (!this->EtoCif(current)) {
@@ -91,7 +95,7 @@ void Lexer::addToken(Token_type type, std::string text)
 {
 	tokens.push_back(Token(type, text));
 }
-void Lexer::tokenizeWord() 
+void Lexer::tokenizeWord()
 {
 	std::string stringbuilder = "";
 	char current = peek(0);
@@ -104,5 +108,51 @@ void Lexer::tokenizeWord()
 		stringbuilder.push_back(current);
 		current = next();
 	}
-	this->addToken(Token_type::WORD, stringbuilder);
+	if (stringbuilder == "print") 
+	{
+		this->addToken(Token_type::PRINT);
+	}
+	else {
+		this->addToken(Token_type::WORD, stringbuilder);
+	}
+}
+void Lexer::tokenizeText()
+{
+	next();
+	std::string stringbuilder = "";
+	char current = peek(0);
+	while (true)
+	{
+		if (current == '\\') 
+		{
+			current = next();
+			switch (current) 
+			{
+			case '"':
+				current = next();
+				stringbuilder.push_back('\"');
+				continue;
+			case 'n':
+				current = next();
+				stringbuilder.push_back('\n');
+				continue;
+			case '\t':
+				current = next();
+				stringbuilder.push_back('\t');
+				continue;
+			}
+			stringbuilder.push_back('\\');
+			continue;
+		}
+		if (current =='"')
+		{
+			break;
+		}
+		stringbuilder.push_back(current);
+		current = next();
+	}
+	next();
+	
+	this->addToken(Token_type::TEXT, stringbuilder);
+	
 }

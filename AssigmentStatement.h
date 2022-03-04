@@ -18,8 +18,8 @@ public:
 	}
 	void execute(Veriables &main_veriables_list) override
 	{
-		double result = (*exp).eval(main_veriables_list);
-		main_veriables_list.set(this->varible, result);
+		value_ptr result = (*exp).eval(main_veriables_list);
+		main_veriables_list.set(this->varible, std::move(result));
 	}
 	std::string get_str() override
 	{
