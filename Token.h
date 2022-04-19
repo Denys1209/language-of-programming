@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "setting.h"
+#include "Veriables.h"
 class Token
 {
 private:

@@ -31,11 +31,7 @@ int  main(int argc, char** argv) {
 	
 	Lexer first(prog);
 	std::vector<Token> PROG_TOKEN = first.tokenize();
-	/*for (auto &i : PROG_TOKEN) 
-	{
-		std::cout << i.getType() <<i.getText()<<std::endl;
-	}*/
-	std::vector<std::unique_ptr<Statement>> exp;
+	std::list<std::unique_ptr<Statement>> exp;
 	Parser par(PROG_TOKEN);
 	try {
 		exp = par.parse();
@@ -43,6 +39,7 @@ int  main(int argc, char** argv) {
 	catch (std::exception s) 
 	{
 		std::cout << s.what() << std::endl;
+		return 0;
 	}
 	
 	/*for (auto&i : exp) 
@@ -51,9 +48,9 @@ int  main(int argc, char** argv) {
 	}*/
 	
 	try {
-		/*std::cout << "\n";
-		std::cout << "w" << "=" << (*par.get_main_veriables_list().get("w")).asDouble() << std::endl;
-		std::cout << "w2" << "=" << (*par.get_main_veriables_list().get("w2")).asDouble() << std::endl;*/
+		for (auto&i : exp) {
+			(*i).execute(par.get_main_veriables_list());
+		}
 	}
 	catch (std::exception s)
 	{

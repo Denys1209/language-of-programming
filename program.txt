@@ -1,7 +1,98 @@
-w = -2+2
-w2 = w+PI
-print "\nw = "+w
-print "\nw2 = "+ w2
+void a()
+{
+print "a"
+}
+a()
+a()
+a()
+
+
+
+
+
+
+
+
+
+print sin(30)+"\n"
+
+int i =0
+input i
+string s = "sdsd"
+print s
+print "\n"
+
+print 1+"s"
+
+while (i<10)
+{
+
+print i
+i=i+1
+}
+print "\n"
+for int s =0; s<10;s=s+1
+{
+print s
+}
+print sin(30)
+print "\n"
+
+
+
+
+while(true){
+	string x = getBatton()
+	int l =0
+	if ( x == "w")
+	{
+		print "1"
+		continue
+	}
+	else if (x == "s")
+	{
+		print "2"
+		continue
+	}
+	else if (x == "a")
+	{
+		print "3"
+		continue
+	}
+	else if (x == "d")
+	{
+		print "4"
+		continue
+	}
+	else if (x == "q")
+	{
+		system("cls")
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

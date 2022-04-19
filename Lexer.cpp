@@ -28,10 +28,29 @@ vector_token Lexer::tokenize()
 	while (this->pos < this->lenght)
 	{
 		char current = peek(0);
+		std::string cur = "";
+		cur += peek(0);
+		cur += peek(1);
 		if (this->EtoCif(current)) { tokenizeNumber(); }
-
-		else if (OPERATOR_CHARS.find(current) != std::string::npos)
+		else if (OPERATOR.find(cur) != OPERATOR.end() && peek(2) == ' ')
 		{
+			this->tokenizeDoubleOperator();
+		}
+		else if (cur == "//") 
+		{
+			this->next();
+			this->next();
+			this->tokenizeComment();
+		}
+		else if (cur == "/*") 
+		{
+			this->next();
+			this->next();
+			this->tokenizeMultilineComment();
+		}
+		else if (OPERATOR.find(std::string(1,current)) != OPERATOR.end())
+		{
+
 			this->tokenizeOperator();
 		}
 		else if (current == '"')
@@ -78,9 +97,40 @@ char Lexer::peek(int relativePosition)
 }
 void Lexer::tokenizeOperator()
 {
-	int position = this->OPERATOR_CHARS.find(peek(0));
-	this->addToken(this->OPERATOR_TOKENS[position]);
+	char current = this->peek(0);
+
+	addToken(this->OPERATOR[std::string(1, current)]);
+	next();
+}
+void Lexer::tokenizeDoubleOperator()
+{
+	std::string tok = "";
+	tok = peek(0);
+	tok += peek(1);
+	this->addToken(this->OPERATOR[tok]);
 	this->next();
+	this->next();
+}
+void Lexer::tokenizeMultilineComment() 
+{
+	char current = peek(0);
+	while (true)
+	{
+		if (current == '\0') throw std::exception("Missing close tag");
+		if (current == '*' && peek(1) == '/') break;
+		current = next();
+	}
+	next();
+	next();
+}
+void Lexer::tokenizeComment() 
+{
+	char current = peek(0);
+	while (true) 
+	{
+		if (current == '\n' || current == '\0' || current == '\r') break;
+		current = next();
+	}
 }
 void Lexer::addToken(Token_type type)
 {
@@ -95,6 +145,10 @@ void Lexer::addToken(Token_type type, std::string text)
 {
 	tokens.push_back(Token(type, text));
 }
+void Lexer::addToken(Token token)
+{
+	tokens.push_back(token);
+}
 void Lexer::tokenizeWord()
 {
 	std::string stringbuilder = "";
@@ -108,10 +162,14 @@ void Lexer::tokenizeWord()
 		stringbuilder.push_back(current);
 		current = next();
 	}
-	if (stringbuilder == "print") 
+	if (this->OPERATOR.find(stringbuilder) != this->OPERATOR.end())
 	{
-		this->addToken(Token_type::PRINT);
+		this->addToken(this->OPERATOR[stringbuilder]);
 	}
+	/*else if (this->TYPE_MAP.find(stringbuilder) != this->TYPE_MAP.end())
+	{
+		this->addToken(this->TYPE_MAP[stringbuilder]);
+	}*/
 	else {
 		this->addToken(Token_type::WORD, stringbuilder);
 	}

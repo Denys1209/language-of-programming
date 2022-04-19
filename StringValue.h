@@ -6,11 +6,15 @@ class StringValue :
 private:
 	std::string value;
 public:
+	StringValue()
+	{
+		this->value = "";
+	}
 	StringValue(std::string value)
 	{
 		this->value = std::move(value);
 	}
-	double asDouble() override
+	int asInt() override
 	{
 		
 		try {
@@ -21,6 +25,40 @@ public:
 			return 0;
 		}
 	}
+	float asFloat() override
+	{
+
+		try {
+			return std::stod(this->value);
+		}
+		catch (std::exception s)
+		{
+			return 0;
+		}
+	}
+	double asDouble() override
+	{
+
+		try {
+			return std::stod(this->value);
+		}
+		catch (std::exception s)
+		{
+			return 0;
+		}
+	}
+	bool asBool() override
+	{
+
+		try {
+			return std::stod(this->value);
+		}
+		catch (std::exception s)
+		{
+			return 0;
+		}
+	}
+	Token_type getType() override { return Token_type::STRING; }
 	std::string asString() override
 	{
 		return this->value;

@@ -13,14 +13,14 @@ public:
 		this->operation = operation;
 	}
 	UnaryExpression() = default;
-	value_ptr eval(Veriables &main_veriables_list) override
+	value_ptr eval(List_variables &main_veriables_list) override
 	{
 		switch (this->operation)
 		{
 		case '-':
-			return  std::make_unique<NumberValue>(-(*((*expr1).eval(main_veriables_list))).asDouble());
+			return  std::make_unique<IntValue>(-(*((*expr1).eval(main_veriables_list))).asInt());
 		case '+':
-			return std::make_unique<NumberValue>((*((*expr1).eval(main_veriables_list))).asDouble());
+			return std::make_unique<IntValue>((*((*expr1).eval(main_veriables_list))).asInt());
 		default:
 			throw std::exception("");
 		}

@@ -11,7 +11,7 @@ public:
 	{
 		this->exp = std::move(exp);
 	}
-	void execute(Veriables &main_veriables_list) override
+	void execute(List_variables &main_veriables_list) override
 	{
 		std::cout << (*(*this->exp).eval(main_veriables_list)).asString();
 	}
