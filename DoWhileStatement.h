@@ -4,10 +4,10 @@ class DoWhileStatement :
 	public Statement
 {
 private:
-	std::unique_ptr<Expression> condition;
-	std::unique_ptr<Statement> statement;
+	std::shared_ptr<Expression> condition;
+	std::shared_ptr<Statement> statement;
 public:
-	DoWhileStatement(std::unique_ptr<Statement> statement, std::unique_ptr<Expression> condition)
+	DoWhileStatement(std::shared_ptr<Statement> statement, std::shared_ptr<Expression> condition)
 	{
 		this->condition = std::move(condition);
 		this->statement = std::move(statement);
@@ -21,16 +21,24 @@ public:
 			try {
 				(*statement).execute(main_veriables_list);
 			}
-			catch (std::exception s)
+			catch (const char*s)
 			{
-				if (s.what() == "break")
+				if (s == BREAK_TEXT)
 				{
+					main_veriables_list.delet_variables_table_last();
 					break;
+
 				}
-				else if (s.what() == "continue")
+				else if (s == CONTINUE_TEXT)
 				{
+					main_veriables_list.delet_variables_table_last();
 					continue;
 				}
+
+			}
+			catch (std::exception s)
+			{
+				throw s;
 			}
 
 		} while ((*(*this->condition).eval(main_veriables_list)).asInt());

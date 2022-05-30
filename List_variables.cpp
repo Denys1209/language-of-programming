@@ -1,5 +1,5 @@
 #include "List_variables.h"
-std::unique_ptr<Veriables> &List_variables::find_veriavbles_for_name(std::string name)
+std::shared_ptr<Veriables> &List_variables::find_veriavbles_for_name(std::string name)
 {
 	for (auto i = this->main_list.begin(); i != this->main_list.end(); ++i)
 	{
@@ -78,12 +78,12 @@ void List_variables::creat_value(std::string name, value_ptr value)
 
 void List_variables::creat_function(std::string name, function_ptr function)
 {
-	(*(*(this->main_list.begin()))).creat_function(name, std::move(function));
+	(*(*(this->main_list.begin()))).creat_function(name, function);
 }
 
 void List_variables::add_variables_table()
 {
-	this->main_list.push_front(std::make_unique<Veriables>(0));
+	this->main_list.push_front(std::make_shared<Veriables>(0));
 }
 
 void List_variables::delet_variables_table_last()

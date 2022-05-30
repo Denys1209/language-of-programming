@@ -1,4 +1,5 @@
 #pragma once
+#include <unordered_map>
 #include <String>
 #include <vector>
 #include <list>
@@ -14,7 +15,7 @@ private:
 	
 	std::string	inpute;
 	int pos, lenght;
-	std::map<std::string, Token_type> OPERATOR = { 
+	std::unordered_map<std::string, Token_type> OPERATOR = {
 		{"+", Token_type::PLUS},
 		{"-", Token_type::MINUS},
 		{"*", Token_type::STAR},
@@ -38,10 +39,13 @@ private:
 		{"!", Token_type::NO},
 		{"{", Token_type::LBRACE},
 		{"}", Token_type::RBRACE},
+		{"[",Token_type::LSQUARE_BRACKET },
+		{"]",Token_type::RSQUARE_BRACKET },
 		{"int", Token_type::INT},
 		{"float", Token_type::INT},
 		{"double", Token_type::INT},
 		{"string", Token_type::STRING},
+		{"list", Token_type::LIST},
 		{"bool", Token_type::BOOL},
 		{"input", Token_type::INPUT},
 		{"for", Token_type::FOR},
@@ -52,6 +56,8 @@ private:
 		{"continue",Token_type::CONTINUE},
 		{"do",Token_type::DO},
 		{"void",Token_type::VOID},
+		{"return",Token_type::RETURN},
+		{"list",Token_type::LIST },
 		
 		};
 	std::map<std::string, Token> TYPE_MAP = {

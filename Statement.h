@@ -4,7 +4,7 @@
 #include "List_variables.h"
 #include "Expression.h"
 #include "System_const.h"
-class Statement
+class Statement 
 {
 public:
 	Statement() = default;

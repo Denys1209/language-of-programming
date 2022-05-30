@@ -16,13 +16,13 @@ public:
 		{
 			std::string res;
 			std::cin >> res;
-			main_veriables_list.set(this->name, std::make_unique<StringValue>(res));
+			main_veriables_list.set(this->name, std::make_shared<StringValue>(res));
 		}
 		else 
 		{
 			double res;
 			std::cin >> res;
-			main_veriables_list.set(this->name, std::make_unique<IntValue>(res));
+			main_veriables_list.set(this->name, std::make_shared<IntValue>(res));
 		}
 	};
 	virtual std::string get_str() { return ""; };

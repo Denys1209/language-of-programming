@@ -4,12 +4,12 @@
 class List_variables
 {
 private:
-	std::forward_list<std::unique_ptr<Veriables>> main_list;
-	std::unique_ptr<Veriables> &find_veriavbles_for_name(std::string name);
+	std::forward_list<std::shared_ptr<Veriables>> main_list;
+	std::shared_ptr<Veriables> &find_veriavbles_for_name(std::string name);
 public:
 	List_variables() 
 	{
-		main_list.push_front(std::move(std::make_unique<Veriables>()));
+		main_list.push_front(std::move(std::make_shared<Veriables>()));
 	}
 	value_ptr &get_value(std::string key);
 	function_ptr &get_function(std::string key);

@@ -1,10 +1,117 @@
-void a()
-{
-print "a"
+
+
+
+list test = {
+{1,2,3,4,5},
+{2,2,3,4,5},
+{1,2,3,4,5}
 }
-a()
-a()
-a()
+for int i = 0; i<3;i=i+1
+{
+	for int a =0; a< 5; a= a+1{ 
+		print test[i][a]
+	}
+	print "\n"	
+}
+for int i = 0; i<3;i=i+1
+{
+	for int a =0; a< 5; a= a+1{ 
+		test[i][a] = a
+	}
+	print "\n"	
+}
+for int i = 0; i<3;i=i+1
+{
+	for int a =0; a< 5; a= a+1{ 
+		print test[i][a]
+	}
+	print "\n"	
+}
+
+
+
+list s = {1,2,3,4,5}
+print s
+s[0] = 3
+print s
+list d[30]
+for int i =0; i< 5; i=i+1
+{
+	s[i] = s[i]+s[i]
+}
+print s
+
+
+int i =0
+i = 1
+
+
+
+
+int i  = 0
+int a = 0
+if (i == a)
+{
+	print 1
+	i = 1
+}
+if(i != a)
+{
+	print 2
+}
+if(i > a)
+{
+	print 3
+	a=3
+}
+if(i < a)
+{
+	print 4
+	i=3
+}
+if(i <= a)
+{
+	print 5
+}
+if(i >= a)
+{
+	print 6
+	i=1
+}
+if(i <= a)
+{
+	print 7
+	i=10
+}
+if(i >= a)
+{
+	print 8
+}
+if(i >= a && i >= a)
+{
+	print 8
+}
+if(i >= a || i >= a)
+{
+	print 8
+}
+print "\n"
+print 2+2
+i=2+2
+i = i*2
+i = i/2
+i = i-2
+print i
+print "\n"
+i = i * 2
+print i
+print "\n"
+int i =0
+print i
+string i
+
+
+print i
 
 
 
@@ -14,16 +121,48 @@ a()
 
 
 
+
+
+void s()
+{
+return 1
+}
+print s()
+
+
+
+
+
+
+void a(a)
+{
+print a
+}
+
+a(1)
+a(2)
+a(3)
+a(4)
+
+
+
+
+
+a(4)
+a(5)
+a(6)
 print sin(30)+"\n"
 
 int i =0
 input i
-string s = "sdsd"
+string s = "s"
+string i= "sdsd"
 print s
 print "\n"
 
-print 1+"s"
-
+print 1
+i = "0"
+int i
 while (i<10)
 {
 
@@ -31,14 +170,13 @@ print i
 i=i+1
 }
 print "\n"
+
 for int s =0; s<10;s=s+1
 {
 print s
 }
 print sin(30)
 print "\n"
-
-
 
 
 while(true){
@@ -68,10 +206,8 @@ while(true){
 	{
 		system("cls")
 	}
-	
+
 }
-
-
 
 
 

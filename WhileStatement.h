@@ -5,10 +5,10 @@ class WhileStatement :
 	public Statement
 {
 private:
-	std::unique_ptr<Expression> condition;
-	std::unique_ptr<Statement> statement;
+	std::shared_ptr<Expression> condition;
+	std::shared_ptr<Statement> statement;
 public:
-	WhileStatement(std::unique_ptr<Expression> condition, std::unique_ptr<Statement> statement)
+	WhileStatement(std::shared_ptr<Expression> condition, std::shared_ptr<Statement> statement)
 	{
 		this->condition = std::move(condition);
 		this->statement = std::move(statement);
@@ -26,10 +26,12 @@ public:
 			{
 				if (s == BREAK_TEXT)
 				{
+					main_veriables_list.delet_variables_table_last();
 					break;
 				}
 				else if (s == CONTINUE_TEXT)
 				{
+					main_veriables_list.delet_variables_table_last();
 					continue;
 				}
 				

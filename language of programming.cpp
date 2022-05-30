@@ -31,7 +31,7 @@ int  main(int argc, char** argv) {
 	
 	Lexer first(prog);
 	std::vector<Token> PROG_TOKEN = first.tokenize();
-	std::list<std::unique_ptr<Statement>> exp;
+	std::list<std::shared_ptr<Statement>> exp;
 	Parser par(PROG_TOKEN);
 	try {
 		exp = par.parse();
@@ -42,10 +42,6 @@ int  main(int argc, char** argv) {
 		return 0;
 	}
 	
-	/*for (auto&i : exp) 
-	{
-		std::cout << (*i).get_str()<<std::endl;
-	}*/
 	
 	try {
 		for (auto&i : exp) {

@@ -10,8 +10,11 @@ enum Token_type
 	DOUBLE,
 	FLOAT,
 	BOOL,
+	LIST,
 	VOID,
 	NONE,
+	RETURN,
+
 
 	PRINT,
 	IF,
@@ -44,6 +47,8 @@ enum Token_type
 	NO,//!
 	LBRACE,//{
 	RBRACE,//}
+	LSQUARE_BRACKET,//[
+	RSQUARE_BRACKET,//]
 	COMMAPOINT,//;
 	COMMA,
 	ENDFILLER

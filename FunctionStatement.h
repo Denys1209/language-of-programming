@@ -5,9 +5,9 @@ class FunctionStatement :
 	public Statement
 {
 private:
-	std::unique_ptr<Expression> exp;
+	std::shared_ptr<Expression> exp;
 public:
-	FunctionStatement(std::unique_ptr<Expression> exp)
+	FunctionStatement(std::shared_ptr<Expression> exp)
 	{
 		this->exp = std::move(exp);
 	};

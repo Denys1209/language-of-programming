@@ -5,12 +5,12 @@ class IfStatement :
 	public Statement
 {
 private:
-	std::list<std::unique_ptr<Expression>> expressions;
-	std::list<std::unique_ptr<Statement>> ifStatements;
-	std::unique_ptr<Statement> elseStatement;
+	std::list<std::shared_ptr<Expression>> expressions;
+	std::list<std::shared_ptr<Statement>> ifStatements;
+	std::shared_ptr<Statement> elseStatement;
 public:
 	IfStatement() = default;
-	IfStatement(std::list<std::unique_ptr<Expression>> expressions, std::list<std::unique_ptr<Statement>> ifStatements, std::unique_ptr<Statement> elseStatement)
+	IfStatement(std::list<std::shared_ptr<Expression>> expressions, std::list<std::shared_ptr<Statement>> ifStatements, std::shared_ptr<Statement> elseStatement)
 	{
 		this->expressions = std::move(expressions);
 		this->ifStatements = std::move(ifStatements);

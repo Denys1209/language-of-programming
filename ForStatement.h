@@ -6,12 +6,12 @@ class ForStatement :
 private:
 	
 
-	std::unique_ptr<Statement> initialization;
-	std::unique_ptr<Expression> termination;
-	std::unique_ptr<Statement> increment;
-	std::unique_ptr<Statement> block;
+	std::shared_ptr<Statement> initialization;
+	std::shared_ptr<Expression> termination;
+	std::shared_ptr<Statement> increment;
+	std::shared_ptr<Statement> block;
 public:
-	ForStatement(std::unique_ptr<Statement> stinitializationatement, std::unique_ptr<Expression> termination,  std::unique_ptr<Statement> increment, std::unique_ptr<Statement> block)
+	ForStatement(std::shared_ptr<Statement> stinitializationatement, std::shared_ptr<Expression> termination,  std::shared_ptr<Statement> increment, std::shared_ptr<Statement> block)
 	{
 		this->initialization = std::move(stinitializationatement);
 		this->termination = std::move(termination);
@@ -28,20 +28,24 @@ public:
 			try {
 				(*block).execute(main_veriables_list);
 			}
-			catch (std::exception s )
+			catch (const char*s)
 			{
-				if (s.what() == BREAK_TEXT)
+				if (s == BREAK_TEXT)
 				{
+					main_veriables_list.delet_variables_table_last();
 					break;
+
 				}
-				else if (s.what() == CONTINUE_TEXT)
+				else if (s == CONTINUE_TEXT)
 				{
+					main_veriables_list.delet_variables_table_last();
 					continue;
 				}
-				else 
-				{
-					throw s;
-				}
+
+			}
+			catch (std::exception s)
+			{
+				throw s;
 			}
 		}
 		main_veriables_list.delet_variables_table_last();

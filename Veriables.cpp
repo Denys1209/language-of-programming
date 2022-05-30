@@ -7,7 +7,7 @@ Veriables::Veriables()
 		param = (*arg[0]).asInt();
 		res = std::sin(param * PI / 180);
 
-		return std::make_unique<DoubleValue>(res);
+		return std::make_shared<DoubleValue>(res);
 	};
 	auto system = [](std::vector<value_ptr> arg)
 	{
@@ -17,23 +17,23 @@ Veriables::Veriables()
 	};
 	auto getBatton = [](std::vector<value_ptr> arg)
 	{
-		return std::make_unique<StringValue>(std::string(1, char(_getch())));
+		return std::make_shared<StringValue>(std::string(1, char(_getch())));
 	};
 
-	this->type_map.insert(std::pair<std::string, value_ptr>("int", std::move(std::make_unique<IntValue>(0))));
-	this->type_map.insert(std::pair<std::string, value_ptr>("float", std::move(std::make_unique<FloatValue>(0))));
-	this->type_map.insert(std::pair<std::string, value_ptr>("double", std::move(std::make_unique<DoubleValue>(0))));
-	this->type_map.insert(std::pair<std::string, value_ptr>("bool", std::move(std::make_unique<BoolValue>(0))));
-	this->type_map.insert(std::pair<std::string, value_ptr>("string", std::move(std::make_unique<StringValue>(""))));
+	this->type_map.insert(std::pair<std::string, value_ptr>("int", std::move(std::make_shared<IntValue>(0))));
+	this->type_map.insert(std::pair<std::string, value_ptr>("float", std::move(std::make_shared<FloatValue>(0))));
+	this->type_map.insert(std::pair<std::string, value_ptr>("double", std::move(std::make_shared<DoubleValue>(0))));
+	this->type_map.insert(std::pair<std::string, value_ptr>("bool", std::move(std::make_shared<BoolValue>(0))));
+	this->type_map.insert(std::pair<std::string, value_ptr>("string", std::move(std::make_shared<StringValue>(""))));
 
-	this->veriables.insert(std::pair<std::string, value_ptr>("PI", std::move(std::make_unique<DoubleValue>(PI))));
-	this->veriables.insert(std::pair<std::string, value_ptr>("E", std::move(std::make_unique<DoubleValue>(2.71828))));
-	this->veriables.insert(std::pair<std::string, value_ptr>("GOLDEN_RATIO", std::move(std::make_unique<DoubleValue>(1.618))));
-	this->veriables.insert(std::pair<std::string, value_ptr>("true", std::move(std::make_unique<BoolValue>(true))));
-	this->veriables.insert(std::pair<std::string, value_ptr>("false", std::move(std::make_unique<BoolValue>(false))));
-	this->functions.insert(std::pair<std::string, function_ptr>("sin", std::move(std::make_unique<SystemFunction>(sin, 1))));
-	this->functions.insert(std::pair<std::string, function_ptr>("system", std::move(std::make_unique<SystemFunction>(system, 1))));
-	this->functions.insert(std::pair<std::string, function_ptr>("getBatton", std::move(std::make_unique<SystemFunction>(getBatton, 0))));
+	this->veriables.insert(std::pair<std::string, value_ptr>("PI", std::move(std::make_shared<DoubleValue>(PI))));
+	this->veriables.insert(std::pair<std::string, value_ptr>("E", std::move(std::make_shared<DoubleValue>(2.71828))));
+	this->veriables.insert(std::pair<std::string, value_ptr>("GOLDEN_RATIO", std::move(std::make_shared<DoubleValue>(1.618))));
+	this->veriables.insert(std::pair<std::string, value_ptr>("true", std::move(std::make_shared<BoolValue>(true))));
+	this->veriables.insert(std::pair<std::string, value_ptr>("false", std::move(std::make_shared<BoolValue>(false))));
+	this->functions.insert(std::pair<std::string, function_ptr>("sin", std::move(std::make_shared<SystemFunction>(sin, 1))));
+	this->functions.insert(std::pair<std::string, function_ptr>("system", std::move(std::make_shared<SystemFunction>(system, 1))));
+	this->functions.insert(std::pair<std::string, function_ptr>("getBatton", std::move(std::make_shared<SystemFunction>(getBatton, 0))));
 
 
 }
@@ -98,7 +98,14 @@ void Veriables::set(std::string name, value_ptr value)
 {
 	try {
 		this->get_value(name);
-		this->veriables[name] = std::move(value);
+		if ((*this->veriables[name]).getType() == (*value).getType()) {
+			(*this->veriables[name]).operator_equal(value);
+		}
+		else 
+		{
+			this->veriables[name] = std::move(value);
+		}
+		
 	}
 	catch (std::exception)
 	{
@@ -116,19 +123,19 @@ void Veriables::creat_value(std::string name, value_ptr value)
 	switch ((*value).getType())
 	{
 	case Token_type::INT:
-		this->veriables[name] = std::move(std::make_unique<IntValue>((*this->get_value(name)).asInt()));
+		this->veriables[name] = std::move(std::make_shared<IntValue>((*this->get_value(name)).asInt()));
 		break;
 	case Token_type::DOUBLE:
-		this->veriables[name] = std::move(std::make_unique<DoubleValue>((*this->get_value(name)).asDouble()));
+		this->veriables[name] = std::move(std::make_shared<DoubleValue>((*this->get_value(name)).asDouble()));
 		break;
 	case Token_type::FLOAT:
-		this->veriables[name] = std::move(std::make_unique<FloatValue>((*this->get_value(name)).asFloat()));
+		this->veriables[name] = std::move(std::make_shared<FloatValue>((*this->get_value(name)).asFloat()));
 		break;
 	case Token_type::BOOL:
-		this->veriables[name] = std::move(std::make_unique<BoolValue>((*this->get_value(name)).asBool()));
+		this->veriables[name] = std::move(std::make_shared<BoolValue>((*this->get_value(name)).asBool()));
 		break;
 	case Token_type::STRING:
-		this->veriables[name] = std::move(std::make_unique<StringValue>((*this->get_value(name)).asString()));
+		this->veriables[name] = std::move(std::make_shared<StringValue>((*this->get_value(name)).asString()));
 		break;
 	default:
 		break;

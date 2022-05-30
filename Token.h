@@ -5,16 +5,17 @@ class Token
 {
 private:
 	Token_type type;
-	std::string txt;
+	std::string text;
 public:
 	Token() = default;
 	
 	Token(Token_type type, std::string  txt)
 	{
 		this->type = type;
-		this->txt = txt;
+		this->text = txt;
 	}
-	Token_type getType() 
+	Token(const Token &temp):Token(temp.type, temp.text){}
+	Token_type getType() const
 	{
 		return this->type;
 	}
@@ -23,15 +24,20 @@ public:
 		this->type = type;
 	}
 
-	std::string getText() 
+	std::string getText() const 
 	{
-		return this->txt;
+		return this->text;
 	}
 	void setText(std::string txt) 
 	{
-		this->txt = txt;
+		this->text = txt;
 	}
-
+	Token& operator= (const Token &temp)
+	{
+		this->text = temp.text;
+		this->type = temp.type;
+		return *this;
+	}
 
 };
 

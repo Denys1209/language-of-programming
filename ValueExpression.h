@@ -6,6 +6,7 @@
 #include "FloatValue.h"
 #include "DoubleValue.h"
 #include "StringValue.h"
+#include "ListValue.h"
 
 class ValueExpression :
 	public Expression
@@ -16,36 +17,41 @@ public:
 	
 	ValueExpression(int value)
 	{
-		this->value = std::make_unique<IntValue>(value);
+		this->value = std::make_shared<IntValue>(value);
 	}
 	ValueExpression(float value)
 	{
-		this->value = std::make_unique<FloatValue>(value);
+		this->value = std::make_shared<FloatValue>(value);
 	}
 	ValueExpression(double value)
 	{
-		this->value = std::make_unique<DoubleValue>(value);
+		this->value = std::make_shared<DoubleValue>(value);
 	}
-	
+	ValueExpression(std::vector<value_ptr> value)
+	{
+		this->value = std::make_shared<ListValue>(value);
+	}
 	ValueExpression(std::string value)
 	{
-		this->value = std::make_unique<StringValue>(value);
+		this->value = std::make_shared<StringValue>(value);
 	}
 	value_ptr eval(List_variables &main_veriables_list) override
 	{
 		if ((*this->value).is_string()) {
-			return std::make_unique<StringValue>((*this->value).asString());
+			return std::make_shared<StringValue>((*this->value).asString());
 		}
 		switch ((*this->value).getType())
 		{
 		case Token_type::INT:
-			return std::make_unique<IntValue>((*this->value).asInt());
+			return std::make_shared<IntValue>((*this->value).asInt());
 		case Token_type::DOUBLE:
-			return std::make_unique<DoubleValue>((*this->value).asDouble());
+			return std::make_shared<DoubleValue>((*this->value).asDouble());
 		case Token_type::FLOAT:
-			return std::make_unique<FloatValue>((*this->value).asFloat());
+			return std::make_shared<FloatValue>((*this->value).asFloat());
 		case Token_type::BOOL:
-			return std::make_unique<BoolValue>((*this->value).asBool());
+			return std::make_shared<BoolValue>((*this->value).asBool());
+		case Token_type::LIST:
+			return std::make_shared<ListValue>((*this->value).asList());
 		default:
 			throw std::exception("unknow type value");
 

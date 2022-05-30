@@ -5,10 +5,10 @@ class SetValueStatement :
 {
 private:
 	std::string varible;
-	std::unique_ptr<Expression> exp;
+	std::shared_ptr<Expression> exp;
 
 public:
-	SetValueStatement(std::string varible, std::unique_ptr<Expression> exp)
+	SetValueStatement(std::string varible, std::shared_ptr<Expression> exp)
 	{
 		this->varible = varible;
 		this->exp = std::move(exp);

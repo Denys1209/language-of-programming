@@ -29,7 +29,13 @@
 #include "FloatValue.h"
 #include "DoubleValue.h"
 #include "StringValue.h"
+#include "ListValue.h"
+#include "ListExpression.h"
 #include "BoolValue.h"
+#include "ReturnStatement.h"
+#include "ListExpressionDeclaration.h"
+#include "ListAssigmentStatement.h"
+#include "ListAccessExpression.h"
 
 
 
@@ -47,25 +53,27 @@ private:
 		
 		return std::stod(s);
 	}
-	std::unique_ptr<Expression> expression();
-	std::unique_ptr<Statement> statement();
-	std::unique_ptr<Expression> conditional();
-	std::unique_ptr<Expression> unary();
-	std::unique_ptr<Expression> function();
-	std::unique_ptr<Expression> primary();
-	std::unique_ptr<Expression> additive();
-	std::unique_ptr<Expression> multiplicative();
-	std::unique_ptr<Statement> assigmentStatement();
-	std::unique_ptr<Statement> ifelse();
-	std::unique_ptr<Statement> Whilestatement();
-	std::unique_ptr<Statement> Forstatement();
-	std::unique_ptr<Expression> logicalOr();
-	std::unique_ptr<Expression> logicalAnd();
-	std::unique_ptr<Expression> equality();
-	std::unique_ptr<Statement> block();
-	std::unique_ptr<Statement> statementOrBlock();
-	std::unique_ptr<Statement> DoWhilestatement();
-	std::unique_ptr<Statement> FunctionDefine();
+	std::shared_ptr<Expression> expression();
+	std::shared_ptr<Statement> statement();
+	std::shared_ptr<Expression> conditional();
+	std::shared_ptr<Expression> unary();
+	std::shared_ptr<Expression> function();
+	std::shared_ptr<Expression> primary();
+	std::shared_ptr<Expression> additive();
+	std::shared_ptr<Expression> multiplicative();
+	std::shared_ptr<Expression> element();
+	std::shared_ptr<Statement> assigmentStatement();
+	std::shared_ptr<Statement> ifelse();
+	std::shared_ptr<Statement> Whilestatement();
+	std::shared_ptr<Statement> Forstatement();
+	std::shared_ptr<Expression> logicalOr();
+	std::shared_ptr<Expression> creatListExpression();
+	std::shared_ptr<Expression> logicalAnd();
+	std::shared_ptr<Expression> equality();
+	std::shared_ptr<Statement> block();
+	std::shared_ptr<Statement> statementOrBlock();
+	std::shared_ptr<Statement> DoWhilestatement();
+	std::shared_ptr<Statement> FunctionDefine();
 	Token_type write_current_token_value_type();
 
 public:
@@ -76,7 +84,7 @@ public:
 		this->pos = 0;
 		
 	}
-	std::list<std::unique_ptr<Statement>> parse();
+	std::list<std::shared_ptr<Statement>> parse();
 	
 	bool match(Token_type type);
 	Token get(int relativePosition);
