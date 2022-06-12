@@ -166,10 +166,6 @@ void Lexer::tokenizeWord()
 	{
 		this->addToken(this->OPERATOR[stringbuilder]);
 	}
-	/*else if (this->TYPE_MAP.find(stringbuilder) != this->TYPE_MAP.end())
-	{
-		this->addToken(this->TYPE_MAP[stringbuilder]);
-	}*/
 	else {
 		this->addToken(Token_type::WORD, stringbuilder);
 	}

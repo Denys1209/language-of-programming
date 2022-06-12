@@ -9,13 +9,12 @@ private:
 public:
 	DoWhileStatement(std::shared_ptr<Statement> statement, std::shared_ptr<Expression> condition)
 	{
-		this->condition = std::move(condition);
-		this->statement = std::move(statement);
+		this->condition = condition;
+		this->statement = statement;
 
 	};
 	void execute(List_variables &main_veriables_list)override
 	{
-
 		do
 		{
 			try {
@@ -25,13 +24,12 @@ public:
 			{
 				if (s == BREAK_TEXT)
 				{
-					main_veriables_list.delet_variables_table_last();
+				
 					break;
 
 				}
 				else if (s == CONTINUE_TEXT)
 				{
-					main_veriables_list.delet_variables_table_last();
 					continue;
 				}
 

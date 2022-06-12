@@ -58,8 +58,10 @@ private:
 		{"void",Token_type::VOID},
 		{"return",Token_type::RETURN},
 		{"list",Token_type::LIST },
+		{"ref",Token_type::REFERENCE },
 		
 		};
+	
 	std::map<std::string, Token> TYPE_MAP = {
 		{"int", Token(Token_type::TYPE, "int") },
 		{"bool", Token(Token_type::TYPE, "bool") },

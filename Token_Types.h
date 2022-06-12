@@ -12,6 +12,7 @@ enum Token_type
 	BOOL,
 	LIST,
 	VOID,
+	REFERENCE,
 	NONE,
 	RETURN,
 

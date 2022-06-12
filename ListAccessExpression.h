@@ -27,16 +27,14 @@ public:
 		this->variable = std::move(variable);
 		this->index = index;
 	}
-	value_ptr eval(List_variables &main_veriables_list) override 
+	value_ptr eval(List_variables &main_veriables_list) override
 	{
-
-		std::shared_ptr<ListValue> list = get_list(main_veriables_list);
+		
+		std::shared_ptr<Value> list = get_list(main_veriables_list);
 
 		std::shared_ptr<Value> value = (*(*std::static_pointer_cast<ListExpression>(index)).last_element()).eval(main_veriables_list);
 		try {
-			
 			return (*list).getElementIndex((*value).asInt());
-			
 		}
 		catch (std::exception exp)
 		{
@@ -46,6 +44,7 @@ public:
 		{
 			throw std::exception(OUT_OF_THE_LIST);
 		}
+		
 	}
 
 

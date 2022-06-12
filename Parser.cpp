@@ -112,6 +112,22 @@ std::shared_ptr<Statement>  Parser::assigmentStatement()
 			return std::make_shared<AssigmentStatement>(variable, std::move(std::make_shared<ValueExpression>(std::vector<value_ptr>())));
 		}
 	}
+	if (current.getType() == Token_type::REFERENCE && this->get(1).getType() == Token_type::WORD)
+	{
+
+		consume(Token_type::REFERENCE);
+		std::string variable = this->get(0).getText();
+		consume(Token_type::WORD);
+		if (this->get(0).getType() == Token_type::EQ) {
+			consume(Token_type::EQ);
+			std::string val = this->get(0).getText();
+			consume(Token_type::WORD);
+			return std::make_shared<AssigmentStatement>(variable, std::make_shared<ReferenceExpression>(val));
+		}
+		else {
+			return std::make_shared<AssigmentStatement>(variable, std::make_shared<ReferenceExpression>(nullptr));
+		}
+	}
 	if (current.getType() == Token_type::INT && this->get(1).getType() == Token_type::WORD)
 	{
 		
@@ -178,14 +194,10 @@ std::shared_ptr<Statement>  Parser::assigmentStatement()
 		consume(Token_type::BOOL);
 		std::string variable = this->get(0).getText();
 		consume(Token_type::WORD);
-		if (this->get(0).getType() == Token_type::EQ)
-		{
-			consume(Token_type::EQ);
-			return std::make_shared<AssigmentStatement>(variable, this->expression());
-		}
-		else {
-			return std::make_shared<AssigmentStatement>(variable, std::move(std::make_shared<ValueExpression>(bool(0))));
-		}
+		consume(Token_type::EQ);
+		return std::make_shared<AssigmentStatement>(variable, this->expression());
+		
+		
 	}
 	if (current.getType() == Token_type::INPUT && this->get(1).getType() == Token_type::WORD)
 	{
@@ -276,15 +288,18 @@ std::shared_ptr<Statement>  Parser::FunctionDefine()
 	std::string name = consume(Token_type::WORD).getText();
 	match(Token_type::LPAREN);
 	std::vector<std::string> args;
-	
+	std::vector<bool> bool_amp;
 
 	while (!match(Token_type::RPAREN))
 	{
+		if (this->get(0).getType() == Token_type::AMP) { bool_amp.push_back(1); consume(Token_type::AMP); }
+		else bool_amp.push_back(0);
+		
 		args.push_back(consume(Token_type::WORD).getText());
 		match(Token_type::COMMA);
 	}
 	std::shared_ptr<Statement> body = this->statementOrBlock();
-	return std::make_shared<FunctionDefineStatement>(std::move(name), std::move(args), std::move(body), this->main_list_variables);
+	return std::make_shared<FunctionDefineStatement>(std::move(name), std::move(args), std::move(body), this->main_list_variables, bool_amp);
 }
 std::shared_ptr<Expression> Parser::multiplicative()
 {
@@ -316,7 +331,6 @@ std::shared_ptr<Expression> Parser::element()
 		(*index).push_back(this->expression());
 		consume(Token_type::RSQUARE_BRACKET);
 	} while (this->get(0).getType() == Token_type::LSQUARE_BRACKET);
-	
 	return std::make_shared<ListAccessExpression>(variable, index);
 	
 }
@@ -448,6 +462,7 @@ std::shared_ptr<Expression> Parser::primary()
 	}
 	if (this->get(0).getType() == Token_type::WORD && this->get(1).getType() == Token_type::LSQUARE_BRACKET)
 	{
+	
 		return this->element();
 	}
 	if (this->match(Token_type::WORD))

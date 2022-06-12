@@ -32,13 +32,11 @@ public:
 			{
 				if (s == BREAK_TEXT)
 				{
-					main_veriables_list.delet_variables_table_last();
 					break;
 
 				}
 				else if (s == CONTINUE_TEXT)
 				{
-					main_veriables_list.delet_variables_table_last();
 					continue;
 				}
 

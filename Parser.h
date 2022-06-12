@@ -36,6 +36,8 @@
 #include "ListExpressionDeclaration.h"
 #include "ListAssigmentStatement.h"
 #include "ListAccessExpression.h"
+#include "ReferenceValue.h"
+#include "ReferenceExpression.h"
 
 
 
@@ -62,6 +64,7 @@ private:
 	std::shared_ptr<Expression> additive();
 	std::shared_ptr<Expression> multiplicative();
 	std::shared_ptr<Expression> element();
+
 	std::shared_ptr<Statement> assigmentStatement();
 	std::shared_ptr<Statement> ifelse();
 	std::shared_ptr<Statement> Whilestatement();

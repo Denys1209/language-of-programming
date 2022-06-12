@@ -63,6 +63,23 @@ public:
 		this->value = (*value).asString();
 		return std::make_shared<StringValue>(this->value);
 	}
+	 std::shared_ptr<Value> getElementIndex(int index) override
+	{
+		return nullptr;
+	}
+	void setElementIndex(int index, const value_ptr&ele)override
+	{
+		
+		this->value[index] = (*(*ele).asString().c_str());
+	}
+	void push_back(value_ptr&ele)override
+	{
+		this->value.push_back((*(*ele).asString().c_str()));
+	}
+	int getSize() override
+	{
+		return this->value.size();
+	}
 	bool operator_not_equal(const std::shared_ptr<Value> &value) override {
 		if (this->value != (*value).asString()) return true;
 		return false;

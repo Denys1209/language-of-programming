@@ -32,6 +32,7 @@ public:
 			main_veriables_list.delet_variables_table_last();
 			throw exc;
 		}
+		main_veriables_list.delet_variables_table_last();
 	};
 	std::string get_str() override { return ""; };
 	~BlockStatement() {};

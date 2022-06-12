@@ -16,7 +16,6 @@ public:
 	};
 	void execute(List_variables &main_veriables_list)override
 	{
-		
 		while ((*(*this->condition).eval(main_veriables_list)).asBool()) 
 		{
 			try {
@@ -26,12 +25,10 @@ public:
 			{
 				if (s == BREAK_TEXT)
 				{
-					main_veriables_list.delet_variables_table_last();
 					break;
 				}
 				else if (s == CONTINUE_TEXT)
 				{
-					main_veriables_list.delet_variables_table_last();
 					continue;
 				}
 				
@@ -42,6 +39,7 @@ public:
 			}
 			
 		}
+
 	
 	};
 	std::string get_str() override { return ""; };

@@ -8,12 +8,11 @@
 #include <fstream>
 
 
-
 int  main(int argc, char** argv) {
 
 	std::string prog = "";
-	std::ifstream filer;          // поток для записи
-	filer.open("program.txt"); // окрываем файл для записи
+	std::ifstream filer;      
+	filer.open("program2.txt");
 	if (!filer.is_open())
 	{
 		std::cout << "error open file" << std::endl;

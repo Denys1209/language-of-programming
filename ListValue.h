@@ -27,19 +27,22 @@ public:
 		}
 
 	}
-	value_ptr getElementIndex(int index) 
+	value_ptr getElementIndex(int index) override
 	{
 		return this->list[index];
 	}
-	void setElementIndex(int index, const value_ptr&ele)
+	void setElementIndex(int index, const value_ptr&ele) override
 	{
 		(*this->list[index]).operator_equal(ele);
 	}
-	void push_back(value_ptr&ele)
+	void push_back(value_ptr&ele) override
 	{
 		this->list.push_back(ele);
 	}
-	
+	int getSize() override
+	{
+		return this->list.size();
+	}
 	Token_type getType() const override
 	{
 		return Token_type::LIST;

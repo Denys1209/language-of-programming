@@ -19,6 +19,12 @@ Veriables::Veriables()
 	{
 		return std::make_shared<StringValue>(std::string(1, char(_getch())));
 	};
+	auto len = [](std::vector<value_ptr> arg)
+	{
+		auto list = std::static_pointer_cast<ListValue>(arg[0]);
+		return std::make_shared<IntValue>((*list).getSize());
+	};
+	
 
 	this->type_map.insert(std::pair<std::string, value_ptr>("int", std::move(std::make_shared<IntValue>(0))));
 	this->type_map.insert(std::pair<std::string, value_ptr>("float", std::move(std::make_shared<FloatValue>(0))));
@@ -34,7 +40,7 @@ Veriables::Veriables()
 	this->functions.insert(std::pair<std::string, function_ptr>("sin", std::move(std::make_shared<SystemFunction>(sin, 1))));
 	this->functions.insert(std::pair<std::string, function_ptr>("system", std::move(std::make_shared<SystemFunction>(system, 1))));
 	this->functions.insert(std::pair<std::string, function_ptr>("getBatton", std::move(std::make_shared<SystemFunction>(getBatton, 0))));
-
+	this->functions.insert(std::pair<std::string, function_ptr>("len", std::move(std::make_shared<SystemFunction>(len, 1))));
 
 }
 Veriables::Veriables(int) {};
