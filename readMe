@@ -1,0 +1,47 @@
+If you want craet value. You must use the following construction.
+Type nameValue
+This language has the following type.
+int
+bool
+float
+Double
+string
+list
+ref
+Or you also can use construction
+Type nameVariable
+to chage type variable if the name variable exist in this area visible the type change otherwise the variable will be created.
+If you want to creat list variable you need to use the following construction.
+list variableName = {expression, expression, ...}
+also you can creat multidimensional list so
+list variableName = 
+{
+{expression, expression, ...},
+{expression, expression, ...},
+...
+}
+If you creat variable which has type ref.
+You must when you creat the variable assign nameVariablee then all what you do with the variable.
+All it will be reflected original variable.
+for example 
+ref refVariable = originalVariable
+You must know that arithmetic expressions work os if you plus int + float you get int.
+So you get value the same type that the first value.
+The language has the following seies
+While(expression)
+{
+body
+},
+for type valueName = expression; terms; iteration
+{
+body
+},
+do
+{
+  body
+}while(expression)
+
+
+
+
+
