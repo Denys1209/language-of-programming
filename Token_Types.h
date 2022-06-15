@@ -26,6 +26,7 @@ enum Token_type
 	BREAK,
 	CONTINUE,
 	DO,
+	STRUCT,
 
 	PLUS,
 	MINUS,
@@ -52,6 +53,7 @@ enum Token_type
 	RSQUARE_BRACKET,//]
 	COMMAPOINT,//;
 	COMMA,
+	POINT,//.
 	ENDFILLER
 
 };

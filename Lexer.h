@@ -59,16 +59,12 @@ private:
 		{"return",Token_type::RETURN},
 		{"list",Token_type::LIST },
 		{"ref",Token_type::REFERENCE },
+		{"struct", Token_type::STRUCT},
+		{".", Token_type::POINT}
 		
 		};
 	
-	std::map<std::string, Token> TYPE_MAP = {
-		{"int", Token(Token_type::TYPE, "int") },
-		{"bool", Token(Token_type::TYPE, "bool") },
-		{"float", Token(Token_type::TYPE, "float") },
-		{"double", Token(Token_type::TYPE, "double") },
-		{"string", Token(Token_type::TYPE, "string") },
-	};
+	
 
 	vector_token tokens;
 	bool  EtoBuk(char iCha); 

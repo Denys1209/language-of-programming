@@ -26,11 +26,7 @@ Veriables::Veriables()
 	};
 	
 
-	this->type_map.insert(std::pair<std::string, value_ptr>("int", std::move(std::make_shared<IntValue>(0))));
-	this->type_map.insert(std::pair<std::string, value_ptr>("float", std::move(std::make_shared<FloatValue>(0))));
-	this->type_map.insert(std::pair<std::string, value_ptr>("double", std::move(std::make_shared<DoubleValue>(0))));
-	this->type_map.insert(std::pair<std::string, value_ptr>("bool", std::move(std::make_shared<BoolValue>(0))));
-	this->type_map.insert(std::pair<std::string, value_ptr>("string", std::move(std::make_shared<StringValue>(""))));
+	
 
 	this->veriables.insert(std::pair<std::string, value_ptr>("PI", std::move(std::make_shared<DoubleValue>(PI))));
 	this->veriables.insert(std::pair<std::string, value_ptr>("E", std::move(std::make_shared<DoubleValue>(2.71828))));
@@ -84,12 +80,8 @@ value_ptr &Veriables::get_value(std::string key) {
 
 }
 
-value_ptr &Veriables::get_type_value(std::string key)
+std::shared_ptr<type_struct> Veriables::get_type_value(std::string key)
 {
-	if (!this->isExistValue(key)) {
-		std::string exp = "unknow type " + key;
-		throw std::exception(exp.c_str());
-	}
 	return this->type_map[key];
 }
 
@@ -147,6 +139,11 @@ void Veriables::creat_value(std::string name, value_ptr value)
 		break;
 	}
 
+}
+void Veriables::creat_type_value(std::string name, std::list<Token> list_values, std::vector<std::string> list_names)
+{
+	std::shared_ptr<type_struct> new_type = std::make_shared<type_struct>(list_values, list_names);
+	this->type_map[name] = new_type;
 }
 void Veriables::creat_function(std::string name, function_ptr function)
 {

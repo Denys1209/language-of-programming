@@ -30,6 +30,7 @@
 #include "DoubleValue.h"
 #include "StringValue.h"
 #include "ListValue.h"
+#include "StructValue.h"
 #include "ListExpression.h"
 #include "BoolValue.h"
 #include "ReturnStatement.h"
@@ -38,8 +39,10 @@
 #include "ListAccessExpression.h"
 #include "ReferenceValue.h"
 #include "ReferenceExpression.h"
-
-
+#include "StructDefineStatement.h"
+#include "PointExpression.h"
+#include "StructAssigmentStatement.h"
+#include "PointAssigmentStatement.h"
 
 class Parser
 {
@@ -64,20 +67,21 @@ private:
 	std::shared_ptr<Expression> additive();
 	std::shared_ptr<Expression> multiplicative();
 	std::shared_ptr<Expression> element();
+	std::shared_ptr<Expression> point();
+	std::shared_ptr<Expression> logicalOr();
+	std::shared_ptr<Expression> creatListExpression();
+	std::shared_ptr<Expression> logicalAnd();
+	std::shared_ptr<Expression> equality();
 
 	std::shared_ptr<Statement> assigmentStatement();
 	std::shared_ptr<Statement> ifelse();
 	std::shared_ptr<Statement> Whilestatement();
 	std::shared_ptr<Statement> Forstatement();
-	std::shared_ptr<Expression> logicalOr();
-	std::shared_ptr<Expression> creatListExpression();
-	std::shared_ptr<Expression> logicalAnd();
-	std::shared_ptr<Expression> equality();
 	std::shared_ptr<Statement> block();
 	std::shared_ptr<Statement> statementOrBlock();
 	std::shared_ptr<Statement> DoWhilestatement();
 	std::shared_ptr<Statement> FunctionDefine();
-	Token_type write_current_token_value_type();
+	Token write_current_token_value_type();
 
 public:
 	Parser(std::vector<Token> tokens)

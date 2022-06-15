@@ -52,7 +52,7 @@ while(true)
 	}
 	system("cls")
 }
-*/
+
 int first = 34
 int s = 50
 void add(&a, b)
@@ -60,12 +60,20 @@ void add(&a, b)
  	a = a+s
 }
 add(first, s)
-print first
-
-
-
-
-
+print first*/
+struct test
+{
+int tests
+}
+struct test2
+{
+test teddsd
+}
+test2 res
+print res.teddsd.tests
+res.teddsd.tests = 2
+print "\n"
+print res.teddsd.tests
 
 
 

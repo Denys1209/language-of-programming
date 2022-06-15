@@ -1,5 +1,4 @@
-﻿
-#include "Lexer.h"
+﻿#include "Lexer.h"
 #include <iostream> 
 #include <string>   
 #include "Parser.h"
@@ -12,7 +11,7 @@ int  main(int argc, char** argv) {
 
 	std::string prog = "";
 	std::ifstream filer;      
-	filer.open("program2.txt");
+	filer.open("program.txt");
 	if (!filer.is_open())
 	{
 		std::cout << "error open file" << std::endl;

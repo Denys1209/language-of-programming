@@ -76,6 +76,7 @@ public:
 	{
 		return nullptr;
 	}
+
 	virtual void setElementIndex(int index, const std::shared_ptr<Value>&ele)
 	{
 		
@@ -83,6 +84,10 @@ public:
 	virtual void push_back(std::shared_ptr<Value>&ele)
 	{
 		
+	}
+	virtual std::shared_ptr<Value> operator_point(std::string name)
+	{
+		return nullptr;
 	}
 	virtual int getSize()
 	{

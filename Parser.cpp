@@ -14,34 +14,14 @@ bool Parser::match(Token_type type)
 	return true;
 
 }
-Token_type Parser::write_current_token_value_type()
+Token Parser::write_current_token_value_type()
 {
 	Token current = this->get(0);
 	pos++;
-	if (current.getType() == Token_type::INT)
-	{
-		return Token_type::INT;
-	}
-	else if (current.getType() == Token_type::FLOAT)
-	{
-		return Token_type::FLOAT;
-	}
-	else if (current.getType() == Token_type::DOUBLE)
-	{
-		return Token_type::DOUBLE;
-	}
-	else if (current.getType() == Token_type::STRING)
-	{
-		return Token_type::STRING;
-	}
-	else if (current.getType() == Token_type::LIST)
-	{
-		return Token_type::LIST;
-	}
-	else 
-	{
-		throw std::exception(UNKNOW_THE_TYPE);
-	}
+	
+	return current;
+	
+	
 }
 Token Parser::consume(Token_type type)
 {
@@ -217,9 +197,7 @@ std::shared_ptr<Statement>  Parser::assigmentStatement()
 	}
 	if (this->get(0).getType() == Token_type::WORD && this->get(1).getType() == Token_type::LSQUARE_BRACKET)
 	{
-
-		
-	std::string variable = consume(Token_type::WORD).getText();
+		std::string variable = consume(Token_type::WORD).getText();
 		std::shared_ptr<ListExpression> index = std::make_shared<ListExpression>();
 		do {
 			consume(Token_type::LSQUARE_BRACKET);
@@ -228,6 +206,34 @@ std::shared_ptr<Statement>  Parser::assigmentStatement()
 		} while (this->get(0).getType() == Token_type::LSQUARE_BRACKET);
 		consume(Token_type::EQ);
 		return std::make_shared<ListAssigmentStatement>(variable, index, this->expression());
+	}
+	if (this->get(0).getType() == Token_type::WORD && this->get(1).getType() == Token_type::WORD)
+	{
+		std::string type = consume(Token_type::WORD).getText();
+		std::string name = consume(Token_type::WORD).getText();
+		return std::make_shared<StructAssigmentStatement>(type, name);
+	}
+	if (this->get(0).getType() == Token_type::WORD && this->get(1).getType() == Token_type::POINT)
+	{
+		std::shared_ptr<Expression> exp1 = this->point();
+		consume(Token_type::EQ);
+		std::shared_ptr<Expression> exp2 = this->expression();
+		return std::make_shared<PointAssigmentStatement>(exp1, exp2);
+	}
+	if (this->get(0).getType() == Token_type::STRUCT && this->get(1).getType() == Token_type::WORD)
+	{
+		consume(Token_type::STRUCT);
+		std::string name = consume(Token_type::WORD).getText();
+		consume(Token_type::LBRACE);
+		std::list<Token> list_values;
+		std::vector<std::string> list_names;
+
+		while (!match(Token_type::RBRACE)) 
+		{
+			list_values.push_back(write_current_token_value_type());
+			list_names.push_back(consume(Token_type::WORD).getText());
+		}
+		return std::make_shared<StructDefineStatement>(name, list_values, list_names);
 	}
 	
 	std::string ex = "Unknow operator assigmentStatement " + current.getText();
@@ -333,6 +339,18 @@ std::shared_ptr<Expression> Parser::element()
 	} while (this->get(0).getType() == Token_type::LSQUARE_BRACKET);
 	return std::make_shared<ListAccessExpression>(variable, index);
 	
+}
+std::shared_ptr<Expression> Parser::point()
+{
+	std::shared_ptr<Expression> exp;
+	std::string name = consume(Token_type::WORD).getText();
+	consume(Token_type::POINT);
+	std::vector<std::string> listkey;
+	listkey.push_back(consume(Token_type::WORD).getText());
+	while (match(Token_type::POINT)) {
+		listkey.push_back(consume(Token_type::WORD).getText());
+	}
+	return std::make_shared<PointExpression>(name, listkey);
 }
 std::shared_ptr<Expression> Parser::logicalOr()
 {
@@ -464,6 +482,11 @@ std::shared_ptr<Expression> Parser::primary()
 	{
 	
 		return this->element();
+	}
+	if (this->get(0).getType() == Token_type::WORD && this->get(1).getType() == Token_type::POINT)
+	{
+
+		return this->point();
 	}
 	if (this->match(Token_type::WORD))
 	{

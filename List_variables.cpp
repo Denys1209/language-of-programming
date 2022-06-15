@@ -35,6 +35,22 @@ value_ptr & List_variables::get_value(std::string key)
 	std::string exc = "unknow value " + key;
 	throw std::exception(exc.c_str());
 }
+std::shared_ptr<type_struct> List_variables::get_type_value(std::string key)
+{
+	for (auto i = this->main_list.begin(); i != this->main_list.end(); ++i)
+	{
+		try
+		{
+			return (*(*i)).get_type_value(key);
+		}
+		catch (std::exception exc)
+		{
+			continue;
+		}
+	}
+	std::string exc = "unknow struct " + key;
+	throw std::exception(exc.c_str());
+}
 function_ptr &List_variables::get_function(std::string key)
 {
 	for (auto i = this->main_list.begin(); i != this->main_list.end(); ++i)
@@ -74,6 +90,12 @@ void List_variables::set(std::string name, value_ptr value)
 void List_variables::creat_value(std::string name, value_ptr value)
 {
 	(*(*(this->main_list.begin()))).creat_value(name, std::move(value));
+}
+
+void List_variables::creat_type_value(std::string name, std::list<Token> list_values, std::vector<std::string> list_names)
+{
+	(*(*(this->main_list.begin()))).creat_type_value(name, list_values, list_names);
+
 }
 
 void List_variables::creat_function(std::string name, function_ptr function)

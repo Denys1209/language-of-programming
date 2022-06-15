@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
-#include "Veriables.h"
+//#include "Veriables.h"
+#include "Token_Types.h"
 class Token
 {
 private:
@@ -32,7 +33,7 @@ public:
 	{
 		this->text = txt;
 	}
-	Token& operator= (const Token &temp)
+	Token operator= (const Token &temp)
 	{
 		this->text = temp.text;
 		this->type = temp.type;
