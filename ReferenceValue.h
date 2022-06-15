@@ -82,6 +82,10 @@ public:
 	{
 		return (*this->value).getElementIndex(index);
 	}
+	 std::shared_ptr<Value> operator_point(std::string name) override
+	{
+		return (*this->value).operator_point(name);
+	}
 	void setElementIndex(int index, const value_ptr&ele) override
 	{
 		(*this->value).setElementIndex(index,ele);
