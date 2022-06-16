@@ -1,50 +1,65 @@
-If you want craet value. You must use the following construction.
-Type nameValue
-This language has the following type.
-int
-bool
-float
-Double
-string
-list
-ref
-Or you also can use construction
-Type nameVariable
-to chage type variable if the name variable exist in this area visible the type change otherwise the variable will be created.
-If you want to creat list variable you need to use the following construction.
+DATA TYPE
+
+This programming language has the following data type:
+- int
+- bool
+- float
+- double
+- string
+- list
+- ref
+
+VARIABLE
+
+To create variable following next construction:
+Type namevariable 
+int date
+
+Also can use this construction (Type nameVariable) to chage data type variable. When the variable already exist in this namespace type of will be changed, 
+otherwise variable will be created.
+
+To create list variable use the following construction:
 list variableName = {expression, expression, ...}
-also you can creat multidimensional list so
+
+To create multidimensional list:
 list variableName = 
 {
 {expression, expression, ...},
 {expression, expression, ...},
 ...
 }
-If you want to get element list you must use the following construction.
+
+To get element from list:
 listVariable[expression]
-Or if you want to chage value you must use listVariable[expression] = expression.
-if you want to creat string variable.
+
+To change value use: 
+listVariable[expression] = expression
+
+To create string variable:
 string nameVariable = "Text"
-If you creat variable which has type ref.
-You must when you creat the variable assign nameVariable then all what you do with the variable.
-All it will be reflected on original variable.
-for example 
+
+To create variable with ref (reference) type, assign nameVariable to existing variable and then all actions will be reflected on connected variables:
+
 ref refVariable = originalVariable
-You must know that arithmetic expressions work os if you plus int + float you get value int type.
-So you get value the same type that the first value.
+
+Arithmetic expressions with different variable type took type of the firs variable (if you take int + float you get a int variable type).
+
+OPERATORS
+
 The language has the follwoing arithmetic operators:
 + = plus,
 - = minus,
 * = multiplication,
-/ = share
-The language has the follwoing operator comparison:
+/ = divide
+
+The language has the follwoing boolean operators:
 ==,
 !=,
 <,
 >,
 <=,
 >=
-all these operator work the same like c++
+
 binary operators:
 ||,
 &&,
@@ -56,21 +71,27 @@ false || true == true
 true || true == true
 !true = false
 !false = true
-The language has the following seies
-While(expression)
+
+CYCLES
+
+The language has the following cycles:
+while(expression)
 {
 body
-},
+}
+
 for type valueName = expression; terms; iteration
 {
 body
-},
+}
+
 do
 {
   body
-}while(expression)
+} while(expression)
+
 Also you can use continue, break in seies.
-when you use continue in seies for example
+Example continue in seies:
 for int i =0; i< 10; i=i+1
 {
   if (i == 3)
@@ -79,6 +100,7 @@ for int i =0; i< 10; i=i+1
   }
   doSomething
 }
+
 When continue do immediately new iteration and doSomething won't be done.
 for int i =0; i< 10; i=i+1
 {
