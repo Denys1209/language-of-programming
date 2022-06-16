@@ -20,13 +20,42 @@ list variableName =
 {expression, expression, ...},
 ...
 }
+If you want to get element list you must use the following construction.
+listVariable[expression]
+Or if you want to chage value you must use listVariable[expression] = expression.
+if you want to creat string variable.
+string nameVariable = "Text"
 If you creat variable which has type ref.
-You must when you creat the variable assign nameVariablee then all what you do with the variable.
-All it will be reflected original variable.
+You must when you creat the variable assign nameVariable then all what you do with the variable.
+All it will be reflected on original variable.
 for example 
 ref refVariable = originalVariable
-You must know that arithmetic expressions work os if you plus int + float you get int.
+You must know that arithmetic expressions work os if you plus int + float you get value int type.
 So you get value the same type that the first value.
+The language has the follwoing arithmetic operators:
++ = plus,
+- = minus,
+* = multiplication,
+/ = share
+The language has the follwoing operator comparison:
+==,
+!=,
+<,
+>,
+<=,
+>=
+all these operator work the same like c++
+binary operators:
+||,
+&&,
+!
+true && true == true
+true && false == false
+true || false == true
+false || true == true
+true || true == true
+!true = false
+!false = true
 The language has the following seies
 While(expression)
 {
@@ -40,6 +69,79 @@ do
 {
   body
 }while(expression)
+Also you can use continue, break in seies.
+when you use continue in seies for example
+for int i =0; i< 10; i=i+1
+{
+  if (i == 3)
+  {
+      continue
+  }
+  doSomething
+}
+When continue do immediately new iteration and doSomething won't be done.
+for int i =0; i< 10; i=i+1
+{
+  if (i == 3)
+  {
+      break
+  }
+  doSomething
+}
+When break do immediately seie is broken.
+If you want to creat function you must use the following construction
+void nameFunction(arg....)
+{
+  body
+}
+All arguments which we pass in the function we pass only copy value.
+If we want to pass reference on variable. 
+It's meant that all the manipulations that we will carry out on this value will be reflected on the original.
+void nameFunction(&arg)
+{
+  body
+}
+if we want to return value we use statement return 
+void nameFunction()
+{
+    return value
+}
+we can creat your own type it make so
+struct nameStruct
+{
+  int intVarialbe
+  float floatVarialbe
+}
+if you want to creat variable your type
+TypeName nameValiable
+if you want to get value from the variable
+you must use operator point
+nameStruct.intVarialbe
+if you want to chage value from the variable
+you must use operator point nad operator equal
+nameStruct.intVarialbe = expression
+if you want to write something you should use print
+for example
+print expression
+if you want to assign value to variable which you input
+you must use the following construct
+input nameVariable
+If you want to get the symbol just pressed
+getButton()
+If you want to get size list you can use function len
+list newList = {0, 1}
+len(newList) - get 2
+
+
+
+
+
+
+
+
+
+
+
 
 
 
