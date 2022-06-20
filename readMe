@@ -90,8 +90,7 @@ do
   body
 } while(expression)
 
-Also you can use continue, break in seies.
-Example continue in seies:
+Also you can use continue, break in seies. Example:
 for int i =0; i< 10; i=i+1
 {
   if (i == 3)
@@ -110,15 +109,16 @@ for int i =0; i< 10; i=i+1
   }
   doSomething
 }
-When break do immediately seie is broken.
-If you want to creat function you must use the following construction
+
+When break do immediately cycle is broken.
+If you want to create function you must use the following construction:
 void nameFunction(arg....)
 {
   body
 }
 All arguments which we pass in the function we pass only copy value.
-If we want to pass reference on variable. 
-It's meant that all the manipulations that we will carry out on this value will be reflected on the original.
+If we wan`t to pass reference on variable. 
+It's mean that all the manipulations that we will carry out on this value will be reflected on the original.
 void nameFunction(&arg)
 {
   body
@@ -128,28 +128,31 @@ void nameFunction()
 {
     return value
 }
-we can creat your own type it make so
+
+We can create your own type it make so
 struct nameStruct
 {
   int intVarialbe
   float floatVarialbe
 }
-if you want to creat variable your type
+
+if you want to create variable your type
 TypeName nameValiable
-if you want to get value from the variable
-you must use operator point
-nameStruct.intVarialbe
-if you want to chage value from the variable
-you must use operator point nad operator equal
+
+if you want to get value from the variable you must use operator point nameStruct.intVarialbe
+
+if you want to change value from the variable you must use operator point nad operator equal
 nameStruct.intVarialbe = expression
-if you want to write something you should use print
-for example
+
+if you want to display something use print, for example:
 print expression
-if you want to assign value to variable which you input
-you must use the following construct
+
+if you want input from a standard input device value to variable use input:
 input nameVariable
+
 If you want to get the symbol just pressed
 getButton()
+
 If you want to get size list you can use function len
 list newList = {0, 1}
 len(newList) - get 2
