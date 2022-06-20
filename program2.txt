@@ -60,7 +60,7 @@ void add(&a, b)
  	a = a+s
 }
 add(first, s)
-print first*/
+print first
 struct test
 {
 int tests
@@ -73,10 +73,18 @@ test2 res
 print res.teddsd.tests
 res.teddsd.tests = 2
 print "\n"
-print res.teddsd.tests
+print res.teddsd.tests*/
 
-
-
+struct test
+{
+int a
+}
+void a(l)
+{
+print l.a
+}
+test ds
+a(ds)
 
 
 

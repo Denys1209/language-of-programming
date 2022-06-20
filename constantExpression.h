@@ -22,6 +22,8 @@ public:
 		else if ((*vl).getType() == Token_type::STRING) { return std::static_pointer_cast<StringValue>(vl); }
 		else if ((*vl).getType() == Token_type::BOOL) { return std::static_pointer_cast<BoolValue>(vl); }
 		else if ((*vl).getType() == Token_type::LIST) { return std::static_pointer_cast<ListValue>(vl); }
+		else if ((*vl).getType() == Token_type::STRUCT) { return std::static_pointer_cast<StructValue>(vl); }
+
 	
 	}
 	std::string get_str()override

@@ -57,7 +57,6 @@ private:
 		{"do",Token_type::DO},
 		{"void",Token_type::VOID},
 		{"return",Token_type::RETURN},
-		{"list",Token_type::LIST },
 		{"ref",Token_type::REFERENCE },
 		{"struct", Token_type::STRUCT},
 		{".", Token_type::POINT}

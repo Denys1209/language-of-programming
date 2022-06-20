@@ -135,6 +135,9 @@ void Veriables::creat_value(std::string name, value_ptr value)
 	case Token_type::STRING:
 		this->veriables[name] = std::move(std::make_shared<StringValue>((*this->get_value(name)).asString()));
 		break;
+	case Token_type::STRUCT:
+		this->veriables[name] = std::move(std::make_shared<StructValue>((*std::static_pointer_cast<StructValue>(this->get_value(name)))));
+		break;
 	default:
 		break;
 	}

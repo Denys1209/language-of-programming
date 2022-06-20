@@ -1,6 +1,7 @@
 #pragma once
 #include "Expression.h"
 #include "Value.h"
+#include "StructValue.h"
 #include "IntValue.h"
 #include "FloatValue.h"
 #include "DoubleValue.h"
@@ -16,6 +17,39 @@ class FunctionExpression :
 private:
 	std::string name;
 	std::vector<std::shared_ptr<Expression>> agruments;
+	std::shared_ptr<StructValue> getStruct(std::shared_ptr<StructValue> val) 
+	{
+		std::map<std::string, value_ptr> newStructMap;
+		for (const auto & i : (*val).getVal()) 
+		{
+			switch ((*i.second).getType())
+			{
+			case Token_type::INT:
+				newStructMap[i.first] = std::make_shared<IntValue>((*i.second).asInt());
+				break;
+			case Token_type::FLOAT:
+				newStructMap[i.first] = std::make_shared<FloatValue>((*i.second).asFloat());
+				break;
+			case Token_type::DOUBLE: 
+				newStructMap[i.first] = std::make_shared<DoubleValue>((*i.second).asDouble());
+				break;
+			case Token_type::BOOL:				
+				newStructMap[i.first] = std::make_shared<BoolValue>((*i.second).asBool());
+				break;
+			case Token_type::STRING:
+				newStructMap[i.first] = std::make_shared<StringValue>((*i.second).asString());
+				break;
+			case Token_type::STRUCT:
+				newStructMap[i.first] = getStruct(std::static_pointer_cast<StructValue>(i.second));
+				break;
+
+
+			default:
+				break;
+			}
+		}
+		return std::make_shared<StructValue>(newStructMap);
+	}
 public:
 	FunctionExpression(std::string name, std::vector<std::shared_ptr<Expression>> agruments)
 	{
@@ -54,7 +88,13 @@ public:
 					main_veriables_list.creat_value((*func).getArgsName(i), std::make_shared<ReferenceValue>(values[i]));
 				}
 				else {
-					main_veriables_list.creat_value((*func).getArgsName(i), values[i]);
+					if ((*values[i]).getType() == Token_type::STRUCT) 
+					{
+						main_veriables_list.creat_value((*func).getArgsName(i), getStruct(std::static_pointer_cast<StructValue>(values[i])));
+					}
+					else {
+						main_veriables_list.creat_value((*func).getArgsName(i), values[i]);
+					}
 				}
 				
 			}

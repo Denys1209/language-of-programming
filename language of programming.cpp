@@ -11,7 +11,7 @@ int  main(int argc, char** argv) {
 
 	std::string prog = "";
 	std::ifstream filer;      
-	filer.open("program.txt");
+	filer.open("program2.txt");
 	if (!filer.is_open())
 	{
 		std::cout << "error open file" << std::endl;
