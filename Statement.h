@@ -10,6 +10,6 @@ public:
 	Statement() = default;
 	virtual void execute(List_variables &main_veriables_list) {};
 	virtual std::string get_str() { return ""; };
-	virtual ~Statement() {};
+	virtual ~Statement() = default;
 };
 

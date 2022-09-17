@@ -93,6 +93,7 @@ public:
 	{
 		return 0;
 	}
+	virtual ~Value() = default;
 };
 using value_ptr = std::shared_ptr<Value>;
 
