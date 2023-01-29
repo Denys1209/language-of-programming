@@ -7,20 +7,12 @@ private:
 	std::function<value_ptr(std::vector<value_ptr> arg)> function;
 	int size;
 public:
-	SystemFunction(std::function<value_ptr(std::vector<value_ptr> arg)> f, int size)
-	{
-		this->function = std::move(f);
-		this->size = size;
-	}
-	SystemFunction() = default;
-	bool is_user_function()override { return false; };
-	int getAtgsCount() override { return this->size; }
+	SystemFunction(std::function<value_ptr(std::vector<value_ptr> arg)> f, int size);
+	SystemFunction();
+	bool is_user_function()override;
+	int getAtgsCount() override;
 
 
-	value_ptr exute(std::vector<value_ptr> arg) override
-	{
-		if (arg.size() != size) throw std::exception(PASS_INCORRECT_NUMBER);
-		return this->function(std::move(arg));
-	}
+	value_ptr exute(std::vector<value_ptr> arg) override;
 };
 

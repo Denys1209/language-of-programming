@@ -7,14 +7,7 @@ class ListExpressionDeclaration :
 private:
 	std::shared_ptr<Expression> val;
 public:
-	ListExpressionDeclaration(std::shared_ptr<Expression> val)
-	{
-		this->val = val;
-	}
-	value_ptr eval(List_variables &main_veriables_list)override
-	{
-		
-		return std::make_shared<ListValue>((*(*val).eval(main_veriables_list)).asInt());
-	}
+	ListExpressionDeclaration(std::shared_ptr<Expression> val);
+	value_ptr eval(List_variables &main_veriables_list)override;
 };
 
